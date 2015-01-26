@@ -24,9 +24,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.StringUtils;
 
-import com.ecsteam.cloudlaunch.statistics.ApplicationStatisticsProvider;
-import com.ecsteam.cloudlaunch.statistics.CloudFoundryStatisticsProvider;
-import com.ecsteam.cloudlaunch.statistics.JvmStatisticsProvider;
+import com.ecsteam.cloudlaunch.services.statistics.ApplicationStatisticsProvider;
+import com.ecsteam.cloudlaunch.services.statistics.CloudFoundryStatisticsProvider;
+import com.ecsteam.cloudlaunch.services.statistics.JvmStatisticsProvider;
 
 /**
  * Create an instance of {@link ApplicationStatisticsProvider} that will provide statistics depending on which
@@ -36,7 +36,7 @@ import com.ecsteam.cloudlaunch.statistics.JvmStatisticsProvider;
  *
  */
 @Configuration
-public class StatisticsConfiguration {
+public class ServiceConfiguration {
 
 	/**
 	 * Create an instance of the provider that can call the Cloud Foundry CloudController APIs to get statistic info

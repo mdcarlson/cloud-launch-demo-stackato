@@ -26,9 +26,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.env.MapPropertySource;
 
 /**
- * This presents an opportunity for the developer to use either application.properties to provide connection info to his
- * CloudFoundry's Cloud Controller API, or to use a CloudFoundry User Provided Service named by the property
- * ecs.cc.serviceId (or default "cc").  
+ * This presents an opportunity for the developer to use either application.properties to provide connection info for
+ * various services, or an equivalent cloud foundry User Provided Service
  * 
  * @author Josh Ghiloni
  *
@@ -56,6 +55,17 @@ public class VcapEnvironmentListener implements ApplicationListener<ApplicationE
 		source.put("ecs.cc.password", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.password}");
 		source.put("ecs.cc.url", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.url}");
 		source.put("ecs.cc.trustSelfSigned", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.trustSelfSigned}");
+
+		source.put("ecs.jenkins.baseUrl", "${vcap.services.${ecs.jenkins.serviceId:jenkins}.credentials.baseUrl}");
+		source.put("ecs.jenkins.jobName", "${vcap.services.${ecs.jenkins.serviceId:jenkins}.credentials.jobName}");
+		source.put("ecs.jenkins.user", "${vcap.services.${ecs.jenkins.serviceId:jenkins}.credentials.user}");
+		source.put("ecs.jenkins.password", "${vcap.services.${ecs.jenkins.serviceId:jenkins}.credentials.password}");
+		
+		source.put("ecs.github.clientId",  "${vcap.services.${ecs.github.serviceId:github}.credentials.clientId}");
+		source.put("ecs.github.clientSecret", "${vcap.services.${ecs.github.serviceId:github}.credentials.clientSecret}");
+		source.put("ecs.github.repoName", "${vcap.services.${ecs.github.serviceId:github}.credentials.repoName}");
+		source.put("ecs.github.repoOwner", "${vcap.services.${ecs.github.serviceId:github}.credentials.repoOwner}");
+		source.put("ecs.github.accessToken", "${vcap.services.${ecs.github.serviceId:github}.credentials.accessToken}");
 
 		event.getEnvironment().getPropertySources().addLast(new MapPropertySource("ecsCloudLaunchProperties", source));
 	}

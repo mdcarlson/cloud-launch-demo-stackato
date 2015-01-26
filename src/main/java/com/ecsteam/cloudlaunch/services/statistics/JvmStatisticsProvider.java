@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecsteam.cloudlaunch.statistics;
+package com.ecsteam.cloudlaunch.services.statistics;
 
-import com.ecsteam.cloudlaunch.statistics.model.ApplicationInstance;
-import com.ecsteam.cloudlaunch.statistics.model.ApplicationStatistics;
+import com.ecsteam.cloudlaunch.services.statistics.model.ApplicationInstance;
+import com.ecsteam.cloudlaunch.services.statistics.model.ApplicationStatistics;
 
 /**
  * Provides statistics available from the current JVM when not in cloudfoundry

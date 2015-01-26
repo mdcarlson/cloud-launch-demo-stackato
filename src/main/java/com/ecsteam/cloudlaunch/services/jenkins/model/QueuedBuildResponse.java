@@ -13,18 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecsteam.cloudlaunch.statistics;
-
-import java.io.IOException;
-
-import com.ecsteam.cloudlaunch.statistics.model.ApplicationStatistics;
+package com.ecsteam.cloudlaunch.services.jenkins.model;
 
 /**
- * A platform-agnostic way to provide statistics about an application
- * 
  * @author Josh Ghiloni
  *
  */
-public interface ApplicationStatisticsProvider {
-	public ApplicationStatistics getCurrentStatistics() throws IOException;
+public class QueuedBuildResponse {
+	private String monitorUri;
+
+	private long wait = 0L;
+
+	public String getMonitorUri() {
+		return monitorUri;
+	}
+
+	public void setMonitorUri(String monitorUri) {
+		this.monitorUri = monitorUri;
+	}
+
+	public long getWait() {
+		return wait;
+	}
+
+	public void setWait(long wait) {
+		this.wait = wait;
+	}
 }

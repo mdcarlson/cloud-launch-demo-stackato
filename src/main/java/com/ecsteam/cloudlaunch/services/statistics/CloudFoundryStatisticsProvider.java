@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecsteam.cloudlaunch.statistics;
+package com.ecsteam.cloudlaunch.services.statistics;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,10 +28,10 @@ import org.cloudfoundry.client.lib.domain.InstanceStats;
 import org.cloudfoundry.client.lib.domain.InstanceStats.Usage;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.ecsteam.cloudlaunch.statistics.model.ApplicationInstance;
-import com.ecsteam.cloudlaunch.statistics.model.ApplicationStatistics;
-import com.ecsteam.cloudlaunch.statistics.model.VcapApplication;
-import com.ecsteam.cloudlaunch.statistics.model.VcapApplication.Limits;
+import com.ecsteam.cloudlaunch.services.statistics.model.ApplicationInstance;
+import com.ecsteam.cloudlaunch.services.statistics.model.ApplicationStatistics;
+import com.ecsteam.cloudlaunch.services.statistics.model.VcapApplication;
+import com.ecsteam.cloudlaunch.services.statistics.model.VcapApplication.Limits;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**

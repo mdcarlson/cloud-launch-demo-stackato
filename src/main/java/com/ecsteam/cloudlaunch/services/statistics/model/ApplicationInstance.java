@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ecsteam.cloudlaunch.statistics.model;
+package com.ecsteam.cloudlaunch.services.statistics.model;
 
 import org.cloudfoundry.client.lib.domain.InstanceState;
 
