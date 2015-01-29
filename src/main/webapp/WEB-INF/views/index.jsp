@@ -11,10 +11,12 @@
 	src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart','gauge']}]}""></script>
 <script src="js/pagetext.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/updates.js"></script>
 
 <script type="text/javascript">
 	$(pageTextClosure);
 	$(dashboardClosure);
+	$(updateClosure);
 </script>
 </head>
 <body>
@@ -38,7 +40,7 @@
 	</header>
 	<h1 class="title">ECS Team Cloud Launch</h1>
 	<div id="main">
-		<div id="update">Update Stuff</div>
+		<div id="update"></div>
 		<div id="pageContent"></div>
 	</div>
 </body>

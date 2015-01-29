@@ -26,6 +26,7 @@ table {
 #update {
 	width: 30%;
 	text-align: center;
+	margin-top: 5%;
 }
 
 #pageContent {
@@ -40,4 +41,8 @@ table {
 h1.title {
 	width: 100%;
 	text-align: center;
+}
+
+#updateButton {
+	margin: 4px;
 }

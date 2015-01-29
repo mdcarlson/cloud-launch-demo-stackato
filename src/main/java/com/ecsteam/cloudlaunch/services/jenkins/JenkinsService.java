@@ -78,7 +78,7 @@ public class JenkinsService {
 
 				if ("queue".equals(next) && "item".equals(current)) {
 					responseObject = new QueuedBuildResponse();
-					responseObject.setMonitorUri(String.format("/services/build/queue/%s", last));
+					responseObject.setMonitorUri(String.format("/services/builds/queue/%s", last));
 
 					return responseObject;
 				}
@@ -114,7 +114,7 @@ public class JenkinsService {
 
 				if ("job".equals(next) && jobName.equals(current)) {
 					responseObject = new QueuedBuildResponse();
-					responseObject.setMonitorUri(String.format("/services/build/job/%s", last));
+					responseObject.setMonitorUri(String.format("/services/builds/job/%s", last));
 
 					return responseObject;
 				}
@@ -139,7 +139,8 @@ public class JenkinsService {
 			response.setDuration(fragment.getDuration());
 			response.setStillBuilding(fragment.isBuilding());
 			response.setResult(fragment.getResult());
-
+			response.setMonitorUri(String.format("/services/builds/job/%s", jobNumber));
+			
 			return response;
 		}
 

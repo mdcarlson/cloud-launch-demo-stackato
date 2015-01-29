@@ -25,6 +25,8 @@ public class MonitorResponse {
 	private String result;
 	
 	private long duration;
+	
+	private String monitorUri;
 
 	public boolean isStillBuilding() {
 		return stillBuilding;
@@ -48,5 +50,13 @@ public class MonitorResponse {
 
 	public void setDuration(long duration) {
 		this.duration = duration;
+	}
+
+	public String getMonitorUri() {
+		return monitorUri;
+	}
+
+	public void setMonitorUri(String monitorUri) {
+		this.monitorUri = monitorUri;
 	}
 }

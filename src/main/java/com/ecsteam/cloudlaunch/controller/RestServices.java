@@ -110,6 +110,11 @@ public class RestServices {
 
 		responseBody = jenkinsService.getJobNumberFromQueue(queueId);
 		if (responseBody != null) {
+			// add URI if it's not there
+			if (responseBody.getMonitorUri() == null) {
+				responseBody.setMonitorUri(String.format("/service/builds/queue/%s", queueId));
+			}
+			
 			response = new ResponseEntity<QueuedBuildResponse>(responseBody, HttpStatus.OK);
 		}
 		else {
