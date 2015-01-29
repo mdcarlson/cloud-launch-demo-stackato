@@ -54,7 +54,7 @@ public class VcapEnvironmentListener implements ApplicationListener<ApplicationE
 		source.put("ecs.cc.user", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.user}");
 		source.put("ecs.cc.password", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.password}");
 		source.put("ecs.cc.url", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.url}");
-		source.put("ecs.cc.trustSelfSigned", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.trustSelfSigned}");
+		source.put("ecs.cc.trustSelfSigned", "${vcap.services.${ecs.cc.serviceId:cc}.credentials.trustSelfSigned:false}");
 
 		source.put("ecs.jenkins.baseUrl", "${vcap.services.${ecs.jenkins.serviceId:jenkins}.credentials.baseUrl}");
 		source.put("ecs.jenkins.jobName", "${vcap.services.${ecs.jenkins.serviceId:jenkins}.credentials.jobName}");
