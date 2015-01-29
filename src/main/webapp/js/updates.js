@@ -80,14 +80,9 @@ function updateClosure() {
 			}
 		}
 		
-		if (wait > 0) {
-			data.wait = 0;
-			setTimeout(function() {
-				monitorBuild(data)
-			}, wait);
-		} else {
+		setTimeout(function() {
 			$.getJSON(uri).done(monitorBuild);
-		}
+		}, wait);
 	}
 
 	var updateState = getUpdateState();

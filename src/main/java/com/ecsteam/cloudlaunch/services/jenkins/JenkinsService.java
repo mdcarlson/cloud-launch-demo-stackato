@@ -89,34 +89,41 @@ public class JenkinsService {
 
 	public QueuedBuildResponse getJobNumberFromQueue(String queueId) {
 		RestTemplate template = new RestTemplate();
-		ResponseEntity<QueueItemResponseFragment> fragmentEntity = template.exchange(
-				"{baseUrl}/queue/item/{queueId}/api/json", HttpMethod.GET, getAuthorizationEntity(),
-				QueueItemResponseFragment.class, baseUrl, queueId);
+		QueuedBuildResponse response = null;
 
-		QueueItemResponseFragment fragment = fragmentEntity.getBody();
-		if (fragment.getExecutable() == null || fragment.getExecutable().getUrl() == null) {
-			QueuedBuildResponse response = new QueuedBuildResponse();
-			response.setWait(1000L);
-			return response;
-		} else {
-			String monitorUrl = fragment.getExecutable().getUrl();
-			String last = null;
-			String current = null;
-			String next = null;
+		// let's just be 100% sure that we don't enter an infinite loop (almost certainly never would)
+		// we have to continuously check this URL because the queued item goes away quickly, so we need
+		// to get the job number ASAP
+		for (int count = 0; count < 1000; ++count) {
+			ResponseEntity<QueueItemResponseFragment> fragmentEntity = template.exchange(
+					"{baseUrl}/queue/item/{queueId}/api/json", HttpMethod.GET, getAuthorizationEntity(),
+					QueueItemResponseFragment.class, baseUrl, queueId);
 
-			String[] parts = monitorUrl.split("/");
+			if (!HttpStatus.OK.equals(fragmentEntity.getStatusCode())) {
+				return null;
+			}
 
-			QueuedBuildResponse responseObject = new QueuedBuildResponse();
-			for (int i = parts.length - 1; i >= 0; --i) {
-				last = parts[i];
-				current = parts[i - 1];
-				next = parts[i - 2];
+			QueueItemResponseFragment fragment = fragmentEntity.getBody();
+			if (fragment.getExecutable() != null && fragment.getExecutable().getUrl() != null) {
+				String monitorUrl = fragment.getExecutable().getUrl();
+				String last = null;
+				String current = null;
+				String next = null;
 
-				if ("job".equals(next) && jobName.equals(current)) {
-					responseObject = new QueuedBuildResponse();
-					responseObject.setMonitorUri(String.format("/services/builds/job/%s", last));
+				String[] parts = monitorUrl.split("/");
 
-					return responseObject;
+				response = new QueuedBuildResponse();
+				for (int i = parts.length - 1; i >= 0; --i) {
+					last = parts[i];
+					current = parts[i - 1];
+					next = parts[i - 2];
+
+					if ("job".equals(next) && jobName.equals(current)) {
+						response = new QueuedBuildResponse();
+						response.setMonitorUri(String.format("/services/builds/job/%s", last));
+
+						return response;
+					}
 				}
 			}
 		}
@@ -140,7 +147,7 @@ public class JenkinsService {
 			response.setStillBuilding(fragment.isBuilding());
 			response.setResult(fragment.getResult());
 			response.setMonitorUri(String.format("/services/builds/job/%s", jobNumber));
-			
+
 			return response;
 		}
 
