@@ -15,6 +15,8 @@
  */
 package com.ecsteam.cloudlaunch.services.statistics;
 
+import org.cloudfoundry.client.lib.domain.InstanceState;
+
 import com.ecsteam.cloudlaunch.services.statistics.model.ApplicationInstance;
 import com.ecsteam.cloudlaunch.services.statistics.model.ApplicationStatistics;
 
@@ -35,9 +37,10 @@ public class JvmStatisticsProvider implements ApplicationStatisticsProvider {
 	public ApplicationStatistics getCurrentStatistics() {
 		ApplicationStatistics stats = new ApplicationStatistics();
 		stats.setInstanceCount(1);
+		stats.setActiveInstance(0);
 		stats.setId(null);
 		stats.setName(null);
-		stats.setDiskLimit(-1);
+		stats.setDiskLimit(1);
 		stats.setHost(null);
 		stats.setPort(0);
 
@@ -53,8 +56,9 @@ public class JvmStatisticsProvider implements ApplicationStatisticsProvider {
 		ApplicationInstance instance = new ApplicationInstance();
 
 		instance.setMemory(runtime.totalMemory());
-		instance.setCpu(-1);
-		instance.setDisk(-1);
+		instance.setCpu(0);
+		instance.setDisk(0);
+		instance.setState(InstanceState.RUNNING);
 
 		stats.getInstances().add(instance);
 

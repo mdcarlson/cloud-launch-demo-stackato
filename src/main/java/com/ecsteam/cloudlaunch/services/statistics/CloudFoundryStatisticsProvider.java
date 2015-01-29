@@ -107,8 +107,8 @@ public class CloudFoundryStatisticsProvider implements ApplicationStatisticsProv
 
 			if (usage != null) {
 				appInstance.setCpu(usage.getCpu());
-				appInstance.setDisk(usage.getDisk() * MEGS_TO_BYTES);
-				appInstance.setMemory(usage.getMem() * MEGS_TO_BYTES);
+				appInstance.setDisk(usage.getDisk());
+				appInstance.setMemory(usage.getMem());
 			}
 
 			appInstances.add(appInstance);
