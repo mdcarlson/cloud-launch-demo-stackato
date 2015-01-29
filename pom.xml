@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ecsteam.com</groupId>
-	<artifactId>cloud-launch-demo</artifactId>
+	<artifactId>ecs-cloud-launch-demo</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
 
