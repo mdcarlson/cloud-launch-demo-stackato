@@ -15,16 +15,24 @@
  */
 package com.ecsteam.cloudlaunch.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,14 +57,17 @@ import com.ecsteam.cloudlaunch.services.statistics.model.ApplicationStatistics;
 public class RestServices {
 
 	@Autowired
+	private ApplicationContext applicationContext;
+
+	@Autowired
 	private ApplicationStatisticsProvider statisticsProvider;
 
 	@Autowired
 	private JenkinsService jenkinsService;
-	
+
 	@Autowired
 	private GithubService githubService;
-	
+
 	@Value("${ecs.deployed.sha:}")
 	private String latestSha;
 
@@ -104,7 +115,7 @@ public class RestServices {
 		else {
 			response = new ResponseEntity<QueuedBuildResponse>(HttpStatus.BAD_REQUEST);
 		}
-		
+
 		return response;
 	}
 
@@ -123,20 +134,44 @@ public class RestServices {
 
 		return response;
 	}
-	
+
 	@RequestMapping(value = "/buildInfo/source", method = RequestMethod.GET)
 	public ResponseEntity<GithubCommit> getLatestCommitInfo() {
 		GithubCommit responseBody = githubService.getLatestCommit();
-		
+
 		if (responseBody != null) {
 			return new ResponseEntity<GithubCommit>(responseBody, HttpStatus.OK);
-		} else {
+		}
+		else {
 			return new ResponseEntity<GithubCommit>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(value = "/buildInfo/deployed", method = RequestMethod.GET)
 	public Map<String, String> getDeployedSha() {
-		return Collections.singletonMap("deployedSha", this.latestSha);
+		// show null if empty string
+		String sha = null;
+		if (StringUtils.hasText(latestSha)) {
+			sha = latestSha;
+		}
+		
+		return Collections.singletonMap("deployedSha", sha);
+	}
+
+	@RequestMapping(value = "/pagetext", method = RequestMethod.GET)
+	public Map<String, List<String>> getPageText() throws IOException {
+		Resource resource = applicationContext.getResource("classpath:/pagetext.txt");
+
+		InputStream in = resource.getInputStream();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+
+		List<String> lines = new ArrayList<String>();
+
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			lines.add(line);
+		}
+		
+		return Collections.singletonMap("pageText", lines);
 	}
 }
