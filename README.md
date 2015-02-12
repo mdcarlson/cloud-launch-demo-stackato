@@ -49,15 +49,15 @@ mvn package
 Push the app and specify the number of instances, memory limit, your unique subdomain, and add the flag --no-start to prevent building the droplet at this point.
 
 ```bash
-cf push <app name> -i 1 -m 512M -n <your unique subdomain> --no-start
+cf push <app_name> -i 1 -m 512M -n <unique_subdomain> --no-start
 ```
 
 Bind the user-provided services to the app.
 
 ```bash
-cf bs <your app name> cc
-cf bs <your app name> jenkins
-cf bs <your app name> github
+cf bs <app_name> cc
+cf bs <app_name> jenkins
+cf bs <app_name> github
 ```
 
 Verify that the user-provided services have bound to the app.
@@ -69,7 +69,7 @@ cf services
 Now start the app.
 
 ```bash
-cf start <your app name>
+cf start <app_name>
 ```
 
 ## Usage Instructions
@@ -81,7 +81,7 @@ Once running, click the "kill the active instance!" link and refresh the page.
 Now use the CF CLI to scale the app out to three instances. 
 
 ```bash
-cf scale <your app name> -i 3
+cf scale <app_name> -i 3
 ```
 
 Click the "kill the active instance!" link, refresh the page and note what happens.
@@ -89,7 +89,7 @@ Click the "kill the active instance!" link, refresh the page and note what happe
 Scale the app back down to one instance.
 
 ```bash
-cf scale <your app name> -i 1
+cf scale <app_name> -i 1
 ```
 
 Test the update portion of the app by committing a change to the GitHub repository. This can be done by checking in a minor change to the text file of the app and submitting a pull request to add that to the master copy. Once the pull request is merged and the app page is refreshed the Update button will now be active. Clicking the Update button will trigger the Jenkins job which does a blue-green deploy of the app and refreshes the page with the updated text file.
