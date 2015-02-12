@@ -22,7 +22,7 @@ Create a Jenkins job and configure it to match your forked GitHub repository and
 
 Create three user-provided-services using the interactive method based on docs provided [here] [cups]. The services should be called "cc", "jenkins", and "github." You will bind these services to the app in a later step. 
 
-The user-provided service "cc" should pass in the following parameter name/paramater: url:https://api.run.pivotal.io, user:*your PWS email*, password:[your PWS password]. The cf CLI will prompt you for the parameters.
+The user-provided service "cc" should pass in the following parameter name/paramater: url:https://api.run.pivotal.io, user:*<your PWS email>*, password:[your PWS password]. The cf CLI will prompt you for the parameters.
 
 ```bash
 cf cups cc -p "url, user, password"
