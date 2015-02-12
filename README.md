@@ -34,7 +34,7 @@ The user-provided service "jenkins" should pass in the following parameter name/
 cf cups jenkins -p "baseUrl, jobName, user, password"
 ```
 
-The user-provided service "github" should pass in the following parameter name/paramater: accessToken:<the token you created by going [here] [token]>, clientId:^the clientId provided to you by your supervisor^, clientSecret:^the clientSecret provided to you by your supervisor^, repoName:<the name of the repo when you forked cloud-launch-demo>, repoOwner:<your GitHub username>. The cf CLI will prompt you for the parameters.
+The user-provided service "github" should pass in the following parameter name/paramater: accessToken:^the token you created by going [here] [token]^, clientId:^the clientId provided to you by your supervisor^, clientSecret:^the clientSecret provided to you by your supervisor^, repoName:^the name of the repo when you forked cloud-launch-demo^, repoOwner:^your GitHub username^. The cf CLI will prompt you for the parameters.
 
 ```bash
 cf cups github -p "accessToken, clientId, clientSecret, repoName, repoOwner"
