@@ -22,23 +22,54 @@ Create a Jenkins job and configure it to match your forked GitHub repository and
 
 Create three user-provided-services using the interactive method based on docs provided [here] [cups]. The services should be called "cc", "jenkins", and "github." You will bind these services to the app in a later step. 
 
-The user-provided service "cc" should pass in the following parameter name/paramater: url:https://api.run.pivotal.io, user:^your PWS email^, password:^your PWS password^. The cf CLI will prompt you for the parameters.
+The user-provided service "cc" should pass in the following parameter names: url, user, and password.
 
 ```bash
 cf cups cc -p "url, user, password"
 ```
 
-The user-provided service "jenkins" should pass in the following parameter name/paramater: baseUrl:http://^location of your Jenkins job home^, jobName:^name of your Jenkins job^, user:^your Jenkins username^, password:^your Jenkins password^. The cf CLI will prompt you for the parameters.
+The cf CLI will prompt your for the paramaters in turn.
+
+```bash
+url> https://api.run.pivotal.io
+user> your PWS email
+password> your PWS password
+```
+
+The user-provided service "jenkins" should pass in the following parameter names: baseUrl, jobName, user, and password.
 
 ```bash
 cf cups jenkins -p "baseUrl, jobName, user, password"
 ```
 
-The user-provided service "github" should pass in the following parameter name/paramater: accessToken:^the token you created by going [here] [token]^, clientId:^the clientId provided to you by your supervisor^, clientSecret:^the clientSecret provided to you by your supervisor^, repoName:^the name of the repo when you forked cloud-launch-demo^, repoOwner:^your GitHub username^. The cf CLI will prompt you for the parameters.
+The cf CLI prompts you for the paramaters.
+
+```bash
+baseUrl> http://url of your Jenkins job home page
+jobName> "name of your Jenkins job"
+user> "Jenkins username"
+password> "Jenkins password"
+```
+
+The user-provided service "github" should pass in the following parameter names: accessToken, clientId, clientSecret, repoName, and repoOwner.
 
 ```bash
 cf cups github -p "accessToken, clientId, clientSecret, repoName, repoOwner"
 ```
+
+The cf CLI once again prompts you for the paramaters.
+
+```bash
+accessToken> "the token you created by going [here] [token]"
+clientId>
+clientSecret>
+repoName>
+repoOwner>
+```
+
+/paramater: accessToken:^the token you created by going [here] [token]^, clientId:^the clientId provided to you by your supervisor^, clientSecret:^the clientSecret provided to you by your supervisor^, repoName:^the name of the repo when you forked cloud-launch-demo^, repoOwner:^your GitHub username^. The cf CLI will prompt you for the parameters.
+
+
 
 Build the app.
 
