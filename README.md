@@ -28,7 +28,7 @@ The user-provided service "cc" should pass in the following parameter names: url
 cf cups cc -p "url, user, password"
 ```
 
-The cf CLI will prompt your for the paramaters in turn.
+The cf CLI will prompt for the paramaters in turn.
 
 ```bash
 url> https://api.run.pivotal.io
