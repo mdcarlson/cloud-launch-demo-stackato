@@ -2,7 +2,6 @@
 applications:
 - name: ecs-cloud-launch-demo
   memory: 512M
-  instances: 3
   path: target/ecs-cloud-launch-demo-1.0.0.war
   timeout: 60
   services:
